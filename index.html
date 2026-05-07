@@ -147,11 +147,32 @@ function confirmBooking() {
             document.getElementById('historyList').innerHTML = `<div style="border-left: 4px solid var(--primary-purple); padding: 15px; background: #1a1a1a; border-radius: 10px;">
                 <h4 style="margin:0; color: white;">${name}</h4>
                 <p style="color: var(--primary-purple); font-size: 0.9rem; margin: 5px 0;">Event: ${event}</p>
-                <p style="color: #888; font-size: 0.8rem; margin: 0;">Status: ₹799 Pending Verification</p>
+                <p style="color: #888; font-size: 0.8rem; margin: 0;">Status: AVAILABLE</p>
             </div>`;
             alert("Booking Saved!");
             showPage('history');
         }
-    </script>
+    <script>
+function sendToWhatsApp() {
+    // 1. Get the name the user typed in
+    const name = document.getElementById('clientName').value;
+
+    // 2. Check if they actually typed a name
+    if (name === "") {
+        alert("Please enter your name first! ✍️");
+        return;
+    }
+
+    // 3. Create the WhatsApp Link (Using your number 9847301379)
+    const phoneNumber = "919847301379";
+    const message = "Hi! My name is " + name + ". I just booked a slot on ZENO. Let's discuss further info!";
+    
+    // 4. Encode the message so the web understands the spaces
+    const finalLink = "https://wa.me/" + phoneNumber + "?text=" + encodeURIComponent(message);
+
+    // 5. Open WhatsApp!
+    window.location.href = finalLink;
+}
+</script>
 </body>
 </html>
