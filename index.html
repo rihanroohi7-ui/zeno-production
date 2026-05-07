@@ -3,176 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZENO | The Pro Standard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <title>ZENO | PRO EDITING</title>
     <style>
-        :root {
-            --primary-purple: #A020F0;
-            --dark-bg: #050505;
-            --card-bg: rgba(20, 20, 20, 0.9);
+        :root { 
+            --purple-grad: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --red: #ff3e3e; 
+            --bg: #0a0a0a; 
         }
-
-        body, html {
-            margin: 0; padding: 0; height: 100%;
-            background: linear-gradient(135deg, #050505 0%, #1a0b2e 50%, #4b1a8a 100%);
-            background-attachment: fixed;
-            color: white; font-family: 'Inter', sans-serif;
+        body { 
+            background: var(--bg); 
+            color: white; 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            padding: 0; 
             overflow-x: hidden;
         }
 
+        /* PURPLE GRADIENT THEME (Left Corner) */
+        body::before {
+            content: "";
+            position: fixed;
+            top: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(106, 17, 203, 0.3) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        /* NAVIGATION / 3 LINES */
+        nav {
+            padding: 20px;
+            display: flex;
+            justify-content: flex-start;
+        }
         .menu-icon {
-            position: fixed; top: 25px; left: 25px; font-size: 30px;
-            cursor: pointer; z-index: 100; color: var(--primary-purple);
-            background: rgba(0,0,0,0.5); padding: 5px 10px; border-radius: 8px;
+            width: 30px;
+            height: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        .menu-icon span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: var(--purple-grad);
+            border-radius: 10px;
         }
 
-        .sidebar {
-            position: fixed; top: 0; left: -280px; width: 250px; height: 100%;
-            background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(15px);
-            padding: 100px 20px; transition: 0.4s; z-index: 99; border-right: 1px solid #333;
+        .container { padding: 20px; max-width: 500px; margin: auto; }
+
+        header { text-align: center; margin-bottom: 40px; }
+        h1 { font-size: 3rem; margin: 0; color: var(--red); letter-spacing: 5px; }
+
+        .section { 
+            background: #151515; 
+            padding: 25px; 
+            border-radius: 20px; 
+            margin-bottom: 20px; 
+            border: 1px solid #222;
         }
-        .sidebar.open { left: 0; }
-        .sidebar a { display: block; color: #888; text-decoration: none; font-size: 1.3rem; margin-bottom: 30px; font-weight: 500; }
-        .sidebar a:hover { color: var(--primary-purple); }
+        h2 { margin-top: 0; font-size: 1.1rem; text-transform: uppercase; color: #888; }
 
-        .page { display: none; padding: 100px 20px; max-width: 800px; margin: 0 auto; animation: fadeIn 0.5s ease; }
-        .active { display: block !important; }
+        .service-list { list-style: none; padding: 0; }
+        .service-list li { padding: 12px 0; border-bottom: 1px solid #222; display: flex; align-items: center; }
+        .service-list li::before { content: "💜"; margin-right: 12px; font-size: 0.9rem; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        #home { text-align: center; padding-top: 15vh; }
-        .main-logo { font-size: 5rem; font-family: 'Space Grotesk'; font-weight: 700; letter-spacing: 10px; color: var(--primary-purple); text-shadow: 0 0 30px rgba(160, 32, 240, 0.5); }
-        
-        .form-card { background: var(--card-bg); padding: 40px; border-radius: 24px; border: 1px solid #333; backdrop-filter: blur(10px); }
-        label { display: block; margin: 15px 0 5px; color: var(--primary-purple); font-size: 0.8rem; font-weight: bold; }
-        input, select, textarea { width: 100%; padding: 15px; margin-bottom: 10px; background: #000; border: 1px solid #333; color: white; border-radius: 10px; box-sizing: border-box; }
-
-        .btn-primary { background: var(--primary-purple); color: white; border: none; padding: 18px; border-radius: 12px; font-weight: 700; cursor: pointer; width: 100%; font-size: 1rem; }
-        .pay-card { display: block; padding: 20px; background: #1a1a1a; border: 2px solid var(--primary-purple); text-align: center; border-radius: 15px; text-decoration: none; color: white; font-weight: bold; }
+        .confirm-btn { 
+            display: block; 
+            width: 100%; 
+            background: var(--purple-grad); 
+            color: white; 
+            text-align: center; 
+            padding: 20px; 
+            border-radius: 15px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 1.2rem;
+            box-shadow: 0 10px 20px rgba(106, 17, 203, 0.3);
+        }
     </style>
 </head>
 <body>
 
-    <div class="menu-icon" onclick="toggleSidebar()">☰</div>
-
-    <nav class="sidebar" id="sidebar">
-        <a href="#" onclick="showPage('home')">HOME</a>
-        <a href="#" onclick="showPage('portfolio')">PORTFOLIO</a>
-        <a href="#" onclick="showPage('booking')">BOOK SLOT</a>
-        <a href="#" onclick="showPage('history')">HISTORY</a>
+    <nav>
+        <div class="menu-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </nav>
 
-    <section id="home" class="page active">
-        <div class="main-logo">ZENO</div>
-        <p style="letter-spacing: 3px; color: #888;">CINEMATIC STORIES. SHOT ON IPHONE.</p>
-        <button class="btn-primary" style="max-width: 300px; margin-top: 40px;" onclick="showPage('booking')">GET STARTED</button>
-    </section>
+    <div class="container">
+        <header>
+            <h1>ZENO</h1>
+            <p style="color: #666; font-size: 0.8rem;">THE PRO STANDARD</p>
+        </header>
 
-    <section id="booking" class="page">
-        <div class="form-card">
-            <h2 style="margin-top:0">Reservation</h2>
-            <form id="zenoForm">
-                <label>FULL NAME</label>
-                <input type="text" id="custName" placeholder="Enter your name" required>
+        <section class="section">
+            <h2>About Portfolio</h2>
+            <p style="color: #ccc; font-size: 0.9rem; line-height: 1.6;">
+                ZENO is a high-performance editing studio managed by **RXN**. We specialize in visual storytelling and advanced motion design.
+            </p>
+        </section>
 
-                <label>MOBILE NUMBER (WhatsApp)</label>
-                <input type="tel" id="custPhone" placeholder="+91 00000 00000" required>
+        <section class="section">
+            <h2>Services</h2>
+            <ul class="service-list">
+                <li>Trending Reel Edits</li>
+                <li>Cinematic AMV Edits</li>
+                <li>Advanced Color Grading</li>
+                <li>3D Motion Graphics</li>
+            </ul>
+        </section>
 
-                <label>EVENT TYPE</label>
-                <select id="eventType" required>
-                    <option value="" disabled selected>Select an event type</option>
-                    <option value="Wedding">Wedding / Marriage</option>
-                    <option value="Birthday">Birthday Party</option>
-                    <option value="Engagement">Engagement / Nikah</option>
-                    <option value="Inauguration">Store Inauguration</option>
-                    <option value="Music Video">Music Video Shoot</option>
-                    <option value="Corporate">Corporate Event</option>
-                    <option value="Football">Sports / Football Match</option>
-                    <option value="Other">Other Cinematic Shoot</option>
-                </select>
-                
-                <label>VENUE LOCATION</label>
-                <input type="text" placeholder="Where is the event?" required>
-                
-                <label>EVENT DATE</label>
-                <input type="date" required>
+        <a href="https://api.whatsapp.com/send?phone=919847301379&text=Hi%20ZENO!%20I'm%20confirming%20my%20ZENO%20booking." class="confirm-btn">
+            ✅ CONFIRM & BOOK
+        </a>
 
-                <label>ADDITIONAL DETAILS</label>
-                <textarea rows="4" placeholder="Tell us about your requirements..."></textarea>
-                
-                <button onclick="confirmBooking()" style="width: 100%; background: #ff3e3e; color: white; padding: 20px; border: none; border-radius: 10px; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: 0.3s;">
-    ✅ CONFIRM & BOOK SLOT
-</button>
+        <footer style="text-align: center; margin-top: 50px; color: #333; font-size: 0.7rem;">
+            &copy; 2026 ZENO PRODUCTION | MANAGED BY RXN
+        </footer>
+    </div>
 
-<script>
-function confirmBooking() {
-    // This collects the name from your form (make sure your input has id="name")
-    const clientName = document.getElementById('name').value || "New Client";
-    
-    // The WhatsApp link
-    const whatsappLink = "https://wa.me/919847301379?text=Hi%20RXN!%20My%20name%20is%20" + clientName + ".%20I%20just%20booked%20a%20slot%20on%20ZENO.%20Let's%20discuss%20the%20details!";
-    
-    // Redirects the user immediately
-    window.location.href = whatsappLink;
-}
-</script>                
-                <button type="submit" class="btn-primary" style="margin-top: 20px;">Confirm & Save Booking</button>
-            </form>
-        </div>
-    </section>
-
-    <section id="portfolio" class="page">
-        <h2 style="color: var(--primary-purple); font-size: 2.5rem;">Sample Work</h2>
-        <div style="background:#111; height:300px; border-radius:20px; display:flex; align-items:center; justify-content:center; color:#444; border:1px solid #333;">[Video Samples Coming Soon]</div>
-    </section>
-
-    <section id="history" class="page">
-        <h2 style="color: var(--primary-purple)">Recent Activity</h2>
-        <div id="historyList" style="background: #111; padding: 20px; border-radius: 15px;"><p style="color: #555;">No bookings yet.</p></div>
-    </section>
-
-    <script>
-        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            document.getElementById('sidebar').classList.remove('open');
-            window.scrollTo(0,0);
-        }
-
-        document.getElementById('zenoForm').onsubmit = function(e) {
-            e.preventDefault();
-            const name = document.getElementById('custName').value;
-            const event = document.getElementById('eventType').value;
-            document.getElementById('historyList').innerHTML = `<div style="border-left: 4px solid var(--primary-purple); padding: 15px; background: #1a1a1a; border-radius: 10px;">
-                <h4 style="margin:0; color: white;">${name}</h4>
-                <p style="color: var(--primary-purple); font-size: 0.9rem; margin: 5px 0;">Event: ${event}</p>
-                <p style="color: #888; font-size: 0.8rem; margin: 0;">Status: AVAILABLE</p>
-            </div>`;
-            alert("Booking Saved!");
-            showPage('history');
-        }
-    <script>
-function sendToWhatsApp() {
-    // 1. Get the name the user typed in
-    const name = document.getElementById('clientName').value;
-
-    // 2. Check if they actually typed a name
-    if (name === "") {
-        alert("Please enter your name first! ✍️");
-        return;
-    }
-
-    // 3. Create the WhatsApp Link (Using your number 9847301379)
-    const phoneNumber = "919847301379";
-    const message = "Hi! My name is " + name + ". I just booked a slot on ZENO. Let's discuss further info!";
-    
-    // 4. Encode the message so the web understands the spaces
-    const finalLink = "https://wa.me/" + phoneNumber + "?text=" + encodeURIComponent(message);
-
-    // 5. Open WhatsApp!
-    window.location.href = finalLink;
-}
-</script>
 </body>
 </html>
