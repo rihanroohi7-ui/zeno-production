@@ -100,9 +100,22 @@
                 <label>ADDITIONAL DETAILS</label>
                 <textarea rows="4" placeholder="Tell us about your requirements..."></textarea>
                 
-                <h3 style="color: var(--primary-purple); margin-top: 30px;">Deposit Payment</h3>
-                <a href="upi://pay?pa=9847301379@fam&pn=ZENO&am=10&cu=INR" class="pay-card">PAY ₹10 via UPI</a>
-                
+                <button onclick="confirmBooking()" style="width: 100%; background: #ff3e3e; color: white; padding: 20px; border: none; border-radius: 10px; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: 0.3s;">
+    ✅ CONFIRM & BOOK SLOT
+</button>
+
+<script>
+function confirmBooking() {
+    // This collects the name from your form (make sure your input has id="name")
+    const clientName = document.getElementById('name').value || "New Client";
+    
+    // The WhatsApp link
+    const whatsappLink = "https://wa.me/919847301379?text=Hi%20RXN!%20My%20name%20is%20" + clientName + ".%20I%20just%20booked%20a%20slot%20on%20ZENO.%20Let's%20discuss%20the%20details!";
+    
+    // Redirects the user immediately
+    window.location.href = whatsappLink;
+}
+</script>                
                 <button type="submit" class="btn-primary" style="margin-top: 20px;">Confirm & Save Booking</button>
             </form>
         </div>
